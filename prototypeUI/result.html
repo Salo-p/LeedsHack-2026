@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Analysis Result</title>
+</head>
+<body>
+  <h1>Summary</h1>
+  <p>{{ summary }}</p>
+
+  <h2>Questions to Ask</h2>
+  <ul>
+    {% for q in questions %}
+      <li>{{ q }}</li>
+    {% endfor %}
+  </ul>
+
+  <a href="/">Upload another slide</a>
+</body>
+</html>
