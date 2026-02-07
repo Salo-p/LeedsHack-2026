@@ -1,48 +1,153 @@
 <html>
     <head>
-        <h1>Leaderboard</h1>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>studentMain</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background: linear-gradient(135deg, #52ad52 0%, #764ba2 100%);
+                margin: 0;
+                padding: 20px;
+                min-height: 100vh;
+            }
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: white;
+                padding: 40px;
+                border-radius: 10px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            }
+            .seat {
+                color: #333;
+                text-align: left;
+                margin-bottom: 0px;
+            }
+            .leader {
+                color: #333;
+                text-align: right;
+                margin-bottom: 0px;
+            }
+            .stats-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+                margin-bottom: 30px;
+            }
+            .grid {
+                background: linear-gradient(135deg, #52ad52 0%, #347234 100%);
+                color: white;
+                padding: 20px;
+                border-radius: 8px;
+                text-align: left;
+                width: 300px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+            .stat-number {
+                font-size: 20px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+            .stat-label {
+                font-size: 14px;
+                opacity: 0.9;
+            }
+            .nav-buttons {
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            button {
+                background-color: #52ad52;
+                color: white;
+                padding: 12px 30px;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            button:hover {
+                background-color: #288146;
+            }
+            .nav-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #288146;
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 14px;
+            }
+            p {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 30px;
+            text-align: right;
+            }
+        </style>
     </head>
     <body>
-        <p>SEAT ATTENDANCE</p>
-        <br>
-        
-        <table border="1" cellpadding="15" cellspacing="0">
-        {% for seat in seats %}
-            {% if loop.index0 % 5 == 0 %}
-            <tr>
-            {% endif %}
+        <div class="container">
+            <div class="stats-grid">
+                <div class="seat">
+                    <h1>Seat Attendance</h1>
+                </div>
+                <div class="leader">
+                    <h1>Leaderboard</h1> 
+                </div> 
+            </div>
+            <br>
+            <div class="stats-grid">
+            <div class="grid">
+                <table border="1" cellpadding="15" cellspacing="0">
+                {% for seat in seats %}
+                    {% if loop.index0 % 5 == 0 %}
+                    <tr>
+                    {% endif %}
 
-            <td style="
-            text-align:center;
-            background-color: {{ 'lightgreen' if seat.attending else '#f2f2f2' }};
-            ">
-            Seat {{ seat.seat_num }}<br>
-            {% if seat.attending %}
-                ✅
-            {% else %}
-                ❌
-            {% endif %}
-            </td>
+                    <td style="
+                    text-align:center;
+                    background-color: {{ 'lightgreen' if seat.attending else '#f2f2f2' }};
+                    ">
+                    Seat {{ seat.seat_num }}<br>
+                    {% if seat.attending %}
+                        ✅
+                    {% else %}
+                        ❌
+                        {% endif %}
+                        </td>
 
-            {% if loop.index0 % 5 == 4 %}
-            </tr>
-            {% endif %}
-        {% endfor %}
-        </table>
-        <br>
-        <p>Computer Science is number {{departmentStats}} on the leaderboard!!!</p>
-
-        <br>
-        <p>Streak: 67</p>
-        <br>
-        <form action="{{ url_for("help")}}" method="post">
-            <button>HELP</button>
+                        {% if loop.index0 % 5 == 4 %}
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </table>
+                </div>
+                <div class="leaderboard">
+                    <br>
+                        <p>Computer Science is number {{departmentStats}} on the leaderboard!!!</p>
+                        <br>
+                        <p>Streak: 67</p>
+                    <br>
+                </div>
+            </div>
+            <div class="stats-grid">
+                <form action="{{ url_for("help")}}" method="post">
+                    <button>HELP</button>
+                </form>
+                <br>
+                <form action="{{ url_for("endWord")}}" method="post">
+                    <button>End Session</button>
+                </form>
+                </a>
+                <form action="{{ url_for("back")}}" method="post">
+                <div class="nav-link">← Back</div>
+                </form>
+            </div>
         </form>
-        <br>
-        <form action="{{ url_for("endWord")}}" method="post">
-            <button>Go to enter end word</button>
-        </form>
-        </a>
+        </div>
     </body>
 
 </html>

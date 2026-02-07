@@ -71,15 +71,16 @@
 </head>
 <body>
     <div class="container">
+        <form action="{{ url_for("staffData")}}" method="post">
         <h1>Statistics</h1>
         <div class="stats-grid">
             <div class="stat-card">
                 <!-- <div class="stat-number">2,547</div> stat-label-->
-                <div class="stat-number">End Word: </div>
+                <div class="stat-number">End Word: {{eWord}}</div>
             </div>
             <div class="stat-card">
                 <!-- <div class="stat-number">12.5K</div> -->
-                <div class="stat-number">Lecture Attendance: </div>
+                <div class="stat-number">Lecture Attendance: {{lectureAtten}}</div>
             </div>
             <div class="stat-card">
                 <!-- <div class="stat-number">89%</div> -->
@@ -89,18 +90,21 @@
                 <!-- <div class="stat-number">4.8</div> -->
                 <div class="stat-number">Cover Again</div>
                 <ul>
-                  <li>Topic 1</li>
-                  <li>Topic 2</li>
-                  <li>Topic 3</li>
+                  <li>{{Topic1}}</li>
+                  <li>{{Topic2}}</li>
+                  <li>{{Topic3}}</li>
                 </ul>
             </div>
         </div>
+        </form>
 
-        
+
+        <form action="{{ url_for("back")}}" method="post">
         <div class="nav-buttons">
             <!--<button onclick="window.location.href='index.html'">← Back to Page 1</button> -->
-            <div class="nav-link" onclick="window.location.href='page2.html'">← Back</div>
+            <div class="nav-link">← Back</div>
         </div>
+        </form>
 
         
     </div>

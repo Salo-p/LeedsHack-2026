@@ -51,9 +51,13 @@
 </head>
 <body>
     <div class="container">
-        <p>Word: </p>
-        <button onclick="window.location.href='page3.html'">Go to Page 3</button>
-        <div class="nav-link" onclick="window.location.href='index.html'">← Back</div>
+        <p>Word: {{sWord}}</p>
+        <form action="{{ url_for("FILLIN")}}" method="post">
+            <button type="submit">Go to Page 3</button>
+        </form>
+        <form action="{{ url_for("back")}}" method="post">
+            <div class="nav-link">← Back</div>
+        </form>
     </div>
 
 </body>
