@@ -13,9 +13,10 @@ def generate_words():
     return start, end
 
 
-def start_lecture(lecture_id, lecturer_id):
+def start_lecture(lecture_id, lecturer_id, department):
     start_word, end_word = generate_words()
 
+    log_lecture(department)
     save_words(lecture_id, lecturer_id, start_word, end_word)
 
     return start_word

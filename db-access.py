@@ -10,6 +10,28 @@ def get_connection():
 
 # LECTURE FUNCTIONS
 
+def log_lecture(department):
+    """Retrieve Elapsed_lec for module, increment by 1, and update the record"""
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = '''
+            SELECT ELAPSED_LEC FROM MODULES WHERE DEPARTMENT = ?
+            '''
+    try:
+        cursor.execute(query, (department,))
+        result = cursor.fetchone()
+        if result:
+            elapsed_lec = result[0] + 1
+            update_query = '''
+                           UPDATE MODULES SET ELAPSED_LEC = ? WHERE DEPARTMENT = ?
+                           '''
+            cursor.execute(update_query, (elapsed_lec, department))
+            conn.commit()
+    except Exception as e:
+        print(f"Error logging lecture: {e}")
+    finally:
+        conn.close()
+
 def save_words(lecture_id, lecturer_id, start_word, end_word, module=""):
     """Save start and end words for a lecture"""
     conn = get_connection()
@@ -60,12 +82,11 @@ def get_end_word(lecture_id, lecturer_id):
         conn.close()
 
 def get_attendance(lecture_id):
-    """Get attendance records for a lecture"""
+    """Get attendance numbers for a lecture. """
     conn = get_connection()
     cursor = conn.cursor()
     query = '''
-            SELECT S.ID, S.ATTENDANCE
-            FROM STUDENTS S
+            SELECT ATTENDING FROM SEATGRID WHERE SEATGRID.LECTURE = ?
             '''
     try:
         cursor.execute(query, (lecture_id,))
@@ -79,10 +100,10 @@ def get_attendance(lecture_id):
 # STUDENT CHECK-IN/CHECK-OUT FUNCTIONS
 
 def save_check_in(lecture_id, user_id, seat_num):
-    """Save a student check-in record"""
+    """Save a student check-in record. """
     conn = get_connection()
     cursor = conn.cursor()
-    query = ""
+    query = 
     try:
         cursor.execute(query, (lecture_id, user_id, seat_num))
         conn.commit()
