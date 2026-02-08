@@ -16,12 +16,12 @@ module_id = 1    # Example module ID, replace with actual logic to get module ID
 # ROOT ROUTE
 
 @app.route("/", methods=["GET"])
-def index():
-    return render_template("index.html")
+def welcome():
+    return render_template("welcome.html")
 
 @app.route("/back", methods=["POST"], endpoint="back")
 def back_route():
-    return render_template("index.html")
+    return render_template("welcome.html")
 
 # STAFF ROUTES
 
@@ -44,7 +44,7 @@ def end_lecture_route():
 
 @app.route("/staffData", methods=["POST"], endpoint="staffData")
 def staff_data_route():
-    return render_template("index.html")
+    return render_template("welcome.html")
 
 # STUDENT ROUTES
 

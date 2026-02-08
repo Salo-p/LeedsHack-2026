@@ -222,3 +222,17 @@ def is_seat_taken(lecture_id, seat_num):
     finally:
         conn.close()
         
+def get_all_occupied_seats(lecture_id):
+    """Returns a list of all seat numbers currently taken in a lecture"""
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = '''SELECT seatNum FROM Attends WHERE lectureID = ?'''
+    try:
+        cursor.execute(query, (lecture_id,))
+        # Fetch all as a list of integers
+        return [row['seatNum'] for row in cursor.fetchall()]
+    except Exception as e:
+        print(f"Error getting occupied seats: {e}")
+        return []
+    finally:
+        conn.close()
