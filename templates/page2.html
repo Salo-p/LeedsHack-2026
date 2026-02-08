@@ -51,14 +51,13 @@
 </head>
 <body>
     <div class="container">
-        <p>Word: {{sWord}}</p>
-        <form action="{{ url_for("endLecture")}}" method="post">
+        <p>Word: {{ sWord }}</p>
+
+        <form action="{{ url_for('endLecture') }}" method="post">
             <button type="submit">End Lecture</button>
         </form>
-        <form action="{{ url_for("back")}}" method="post">
-            <div class="nav-link">← Back</div>
-        </form>
-    </div>
 
+        <a href="{{ url_for('backToWelcome') }}" class="nav-link">← Back</a>
+    </div>
 </body>
 </html>
