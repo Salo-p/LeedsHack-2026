@@ -1,4 +1,4 @@
-from db_access import *
+from accessdb import *
 
 def check_in(lecture_id, user_id, word, seat_num):
     """Check in a student with unlimited attempts"""

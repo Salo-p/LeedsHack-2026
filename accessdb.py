@@ -1,6 +1,6 @@
 import sqlite3
 
-DB_NAME = "attendence.db"
+DB_NAME = "attendance.db"
 
 def get_connection():
     """Create and return a database connection"""

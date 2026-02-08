@@ -1,4 +1,6 @@
-from db_access import *
+from os import access
+from accessdb import *
+import random
 
 def generate_words():
     with open("words.txt", "r") as f:
