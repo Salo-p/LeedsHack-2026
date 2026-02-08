@@ -3,6 +3,11 @@ from accessdb import *
 def check_in(lecture_id, lecturer_id, student_id, word, seat_num):
     """Check in a student with unlimited attempts"""
     correct_word = get_start_word(lecture_id, lecturer_id)
+    if word.strip().upper() != correct_word.strip().upper():
+        return {"error": "Incorrect start word"}
+    print("Entered word:", word)
+    print("Correct word:", correct_word)
+    print("Seat:", seat_num)
 
     if word != correct_word:
         return {"error": "Incorrect start word"}
@@ -16,7 +21,9 @@ def check_in(lecture_id, lecturer_id, student_id, word, seat_num):
 
 def check_out(lecture_id, lecturer_id, student_id, word):
     correct_word = get_end_word(lecture_id, lecturer_id)
-
+    if word.strip().upper() != correct_word.strip().upper():
+        return {"error": "Incorrect start word"}
+    
     if word != correct_word:
         return {"error": "Incorrect end word"}
 
