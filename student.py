@@ -1,4 +1,7 @@
+from db_access import *
+
 def check_in(lecture_id, user_id, word, seat_num):
+    """Check in a student with unlimited attempts"""
     correct_word = get_start_word(lecture_id)
 
     if word != correct_word:

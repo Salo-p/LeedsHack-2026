@@ -1,4 +1,4 @@
-import random
+from db_access import *
 
 def generate_words():
     with open("words.txt", "r") as f:
@@ -13,17 +13,17 @@ def generate_words():
     return start, end
 
 
-def start_lecture(lecture_id, lecturer_id, department):
+def start_lecture(lecture_id, lecturer_id, module_id):
     start_word, end_word = generate_words()
 
-    log_lecture(department)
-    save_words(lecture_id, lecturer_id, start_word, end_word)
+    log_lecture(module_id)  # Log the lecture for the module
+    save_words(lecture_id, lecturer_id, start_word, end_word, module_id)  # Save the start and end words for the lecture
 
     return start_word
 
 
 def end_lecture(lecture_id, lecturer_id):
-    end_word = get_end_word(lecture_id, lecturer_id)
+    end_word = get_end_word(lecture_id)
 
     attendance = get_attendance(lecture_id)
     return end_word, attendance
