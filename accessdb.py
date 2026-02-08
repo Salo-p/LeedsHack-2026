@@ -138,13 +138,13 @@ def save_words(lecture_id, lecturer_id, start_word, end_word, module_id):
     finally:
         conn.close()
 
-def get_start_word(lecture_id):
+def get_start_word(lecture_id, lecturer_id):
     """Get the start word for a lecture"""
     conn = get_connection()
     cursor = conn.cursor()
-    query = '''SELECT wordStart FROM Lecture WHERE lectureID = ?'''
+    query = '''SELECT wordStart FROM Lecture WHERE lectureID = ? AND lecturerID = ?'''
     try:
-        cursor.execute(query, (lecture_id,))
+        cursor.execute(query, (lecture_id, lecturer_id))
         result = cursor.fetchone()
         return result[0] if result else None
     except Exception as e:
@@ -152,13 +152,13 @@ def get_start_word(lecture_id):
     finally:
         conn.close()
 
-def get_end_word(lecture_id):
+def get_end_word(lecture_id, lecturer_id):
     """Get the end word for a lecture"""
     conn = get_connection()
     cursor = conn.cursor()
-    query = '''SELECT wordEnd FROM Lecture WHERE lectureID = ?'''
+    query = '''SELECT wordEnd FROM Lecture WHERE lectureID = ? AND lecturerID = ?'''
     try:
-        cursor.execute(query, (lecture_id,))
+        cursor.execute(query, (lecture_id,lecturer_id))
         result = cursor.fetchone()
         return result[0] if result else None
     except Exception as e:
@@ -195,13 +195,13 @@ def save_check_in(lecture_id, student_id, seat_num):
     finally:
         conn.close()
 
-def save_check_out(lecture_id, user_id):
+def save_check_out(lecture_id, student_id):
     """Save a student check-out record"""
     conn = get_connection()
     cursor = conn.cursor()
     query = '''DELETE FROM Attends WHERE lectureID = ? AND studentID = ?'''
     try:
-        cursor.execute(query, (lecture_id, user_id))
+        cursor.execute(query, (lecture_id, student_id))
         conn.commit()
     except Exception as e:
         print(f"Error saving check-out: {e}")

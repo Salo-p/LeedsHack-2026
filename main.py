@@ -8,7 +8,7 @@ app = Flask(__name__, template_folder="templates")
 # Initialize database on startup
 init_db()
 
-lecture_id = 1  # Example lecture ID, replace with actual logic to get lecture ID
+lecture_id = 5  # Example lecture ID, replace with actual logic to get lecture ID
 lecturer_id = 101  # Example lecturer ID, replace with actual logic to get lecturer ID
 student_id = 4   # Example student ID, replace with actual logic to get student ID
 module_id = 1    # Example module ID, replace with actual logic to get module ID
@@ -67,6 +67,7 @@ def check_in_route():
 
     result = check_in(
         lecture_id,
+        lecturer_id,
         student_id,
         s_word,
         seat_num
