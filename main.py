@@ -118,7 +118,7 @@ def end_word_route():
 
 @app.route("/help", methods=["POST"], endpoint="help")
 def help_route():
-    return render_template("index.html")
+    return render_template("\AI summary\templates\index.html")
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000) 

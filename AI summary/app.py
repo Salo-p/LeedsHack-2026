@@ -70,7 +70,7 @@ def analyse():
         return f"Something went wrong: {e}", 500
 
     finally:
-        # delete the file after processing
+        # delete file
         if os.path.exists(filepath):
             os.remove(filepath)
 
