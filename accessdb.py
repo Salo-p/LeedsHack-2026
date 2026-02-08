@@ -128,16 +128,18 @@ def save_words(lecturer_id, start_word, end_word, module_id):
     conn = get_connection()
     cursor = conn.cursor()
 
+    lecture_id = 2
     query = '''
-        INSERT INTO Lecture (moduleID, lecturerID, wordStart, wordEnd)
-        VALUES (?, ?, ?, ?)
-    '''
-    cursor.execute(query, (module_id, lecturer_id, start_word, end_word))
+            UPDATE Lecture
+            SET wordStart = ?, wordEnd = ?
+            WHERE lectureID = ? AND lecturerID = ?
+            '''
+    cursor.execute(query, (start_word, end_word, lecture_id, lecturer_id))
     conn.commit()
 
     lecture_id = cursor.lastrowid  # 🔥 THIS IS THE KEY
     conn.close()
-    return lecture_id
+    return start_word
 
 def get_start_word(lecture_id, lecturer_id):
     """Get the start word for a lecture"""

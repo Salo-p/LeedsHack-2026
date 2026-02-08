@@ -20,14 +20,14 @@ def start_lecture(lecturer_id, module_id):
 
     log_lecture_module(module_id)
 
-    lecture_id = save_words(
+    start_word = save_words(
         lecturer_id,
         start_word,
         end_word,
         module_id
     )
 
-    return lecture_id, start_word
+    return start_word
 
 
 def end_lecture(lecture_id, lecturer_id):

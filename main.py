@@ -10,7 +10,7 @@ app.secret_key = "dev-secret-key"  # required for sessions
 # Initialize database on startup
 init_db()
 
-lecture_id = 2  # Example lecture ID, replace with actual logic to get lecture ID
+global lecture_id = 2  # Example lecture ID, replace with actual logic to get lecture ID
 lecturer_id = 101  # Example lecturer ID, replace with actual logic to get lecturer ID
 student_id = 4   # Example student ID, replace with actual logic to get student ID
 module_id = 1    # Example module ID, replace with actual logic to get module ID
@@ -33,12 +33,12 @@ def studentMain():
 
 @app.route("/Lecturer", methods=["POST"], endpoint="Lecturer")
 def lecturer_route():
-    lecture_id, start_word = start_lecture(
+    start_word = start_lecture(
         lecturer_id,
         module_id
     )
 
-    session["lecture_id"] = lecture_id  # 🔥 shared reference
+    #session["lecture_id"] = lecture_id  # 🔥 shared reference
 
     return render_template("page2.html", sWord=start_word)
 
