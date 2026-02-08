@@ -16,17 +16,21 @@ module_id = 1    # Example module ID, replace with actual logic to get module ID
 # ROOT ROUTE
 
 @app.route("/", methods=["GET"])
+def index():
+    return render_template("welcome.html")
+
+@app.route("/welcome", methods=["GET"])
 def welcome():
     return render_template("welcome.html")
 
-@app.route("/back", methods=["POST"], endpoint="back")
-def back_route():
-    return render_template("welcome.html")
+@app.route("/studentMain", methods=["GET"])
+def studentMain():
+    return render_template("studentMain.html")
 
 # STAFF ROUTES
 
-@app.route("/startLecture", methods=["POST"], endpoint="startLecture")
-def start_lecture_route():
+@app.route("/Lecturer", methods=["POST"], endpoint="Lecturer")
+def lecturer_route():
     start_word = start_lecture(
         lecture_id,
         lecturer_id,
@@ -44,9 +48,14 @@ def end_lecture_route():
 
 @app.route("/staffData", methods=["POST"], endpoint="staffData")
 def staff_data_route():
-    return render_template("welcome.html")
+    return render_template("index.html")
 
 # STUDENT ROUTES
+
+@app.route("/Student", methods=["POST"], endpoint="Student")
+def student_route():
+    return render_template("studentCheckIn.html")
+           
 
 @app.route("/checkin", methods=["POST"], endpoint="checkIn")
 def check_in_route():
@@ -119,6 +128,20 @@ def end_word_route():
 @app.route("/help", methods=["POST"], endpoint="help")
 def help_route():
     return render_template("\AI summary\templates\index.html")
+
+
+# BACK BUTTON ROUTES
+    
+@app.route("/backToWelcome", methods=["GET"])
+def backToWelcome():
+    return redirect(url_for("welcome"))
+
+
+@app.route("/backToStudentMain", methods=["GET"])
+def backToStudentMain():
+    return redirect(url_for("studentMain"))
+
+# RUN THE APP
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000) 
