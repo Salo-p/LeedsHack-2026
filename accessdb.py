@@ -8,6 +8,101 @@ def get_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+def init_db():
+    """Initialize the database with required tables"""
+    conn = get_connection()
+    cursor = conn.cursor()
+    
+    # Create Module table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Module (
+            moduleID INTEGER PRIMARY KEY,
+            numLectures INTEGER DEFAULT 0
+        )
+    ''')
+    
+    # Create Lecture table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Lecture (
+            lectureID INTEGER PRIMARY KEY,
+            moduleID INTEGER NOT NULL,
+            lecturerID INTEGER NOT NULL,
+            wordStart TEXT,
+            wordEnd TEXT,
+            FOREIGN KEY (moduleID) REFERENCES Module(moduleID)
+        )
+    ''')
+    
+    # Create Attends table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Attends (
+            lectureID INTEGER NOT NULL,
+            studentID INTEGER NOT NULL,
+            seatNum INTEGER NOT NULL,
+            PRIMARY KEY (lectureID, studentID),
+            FOREIGN KEY (lectureID) REFERENCES Lecture(lectureID)
+        )
+    ''')
+    
+    conn.commit()
+    conn.close()
+
+# for testing
+def populate_test_data():
+    """Populate the database with test data"""
+    conn = get_connection()
+    cursor = conn.cursor()
+    
+    try:
+        # Clear existing data
+        cursor.execute('DELETE FROM Attends')
+        cursor.execute('DELETE FROM Lecture')
+        cursor.execute('DELETE FROM Module')
+        
+        # Insert test modules
+        modules = [
+            (1, 0),  # moduleID=1, numLectures=0
+            (2, 0),  # moduleID=2, numLectures=0
+            (3, 0),  # moduleID=3, numLectures=0
+        ]
+        cursor.executemany('INSERT INTO Module (moduleID, numLectures) VALUES (?, ?)', modules)
+        
+        # Insert test lectures with test words
+        lectures = [
+            (1, 1, 101, 'PYTHON', 'JAVASCRIPT'),    # lectureID=1, moduleID=1, lecturerID=101
+            (2, 1, 101, 'DATABASE', 'NETWORKING'),  # lectureID=2, moduleID=1, lecturerID=101
+            (3, 2, 102, 'ALGORITHM', 'DATASTRUCTURE'),  # lectureID=3, moduleID=2, lecturerID=102
+        ]
+        cursor.executemany(
+            'INSERT INTO Lecture (lectureID, moduleID, lecturerID, wordStart, wordEnd) VALUES (?, ?, ?, ?, ?)',
+            lectures
+        )
+        
+        # Insert test attendance records
+        attendance = [
+            (1, 201, 1),   # lectureID=1, studentID=201, seatNum=1
+            (1, 202, 2),   # lectureID=1, studentID=202, seatNum=2
+            (1, 203, 3),   # lectureID=1, studentID=203, seatNum=3
+            (2, 201, 1),   # lectureID=2, studentID=201, seatNum=1
+            (2, 204, 4),   # lectureID=2, studentID=204, seatNum=4
+            (3, 202, 2),   # lectureID=3, studentID=202, seatNum=2
+            (3, 205, 5),   # lectureID=3, studentID=205, seatNum=5
+        ]
+        cursor.executemany(
+            'INSERT INTO Attends (lectureID, studentID, seatNum) VALUES (?, ?, ?)',
+            attendance
+        )
+        
+        conn.commit()
+        print("✓ Test data populated successfully")
+        print(f"  - 3 modules created")
+        print(f"  - 3 lectures created with words")
+        print(f"  - 7 attendance records created")
+    except Exception as e:
+        print(f"Error populating test data: {e}")
+    finally:
+        conn.close()
+
 # LECTURE FUNCTIONS
 
 def log_lecture(module_id):
