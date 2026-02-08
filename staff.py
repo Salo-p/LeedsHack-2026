@@ -31,7 +31,7 @@ def start_lecture(lecturer_id, module_id):
 
 
 def end_lecture(lecture_id, lecturer_id):
-    end_word = get_end_word(lecture_id)
+    end_word = get_end_word(lecture_id, lecturer_id)
 
     attendance = get_attendance(lecture_id)
     return end_word, attendance
