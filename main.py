@@ -35,8 +35,8 @@ def end_lecture_route():
 def check_in_route():
     try:
         check_in(
-            request.lecture_id,
-            request.user_id,
+            lecture_id,
+            user_id,
             request.form["sWord"],
             request.form["seatNum"]
         )
@@ -51,8 +51,8 @@ def check_in_route():
 @app.route("/checkout", methods=["POST"])    
 def check_out_route():
     check_out(
-        request.lecture_id,
-        request.user_id,
+        lecture_id,
+        student_id,
         request.form["eWord"]
     )
 
