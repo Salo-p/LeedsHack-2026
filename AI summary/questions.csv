@@ -1,0 +1,18 @@
+What does this formula represent?
+Why is this assumption valid?
+How does this apply to real-world problems?
+"The diagram shows feedback loops going back from Deployment. Are there ever situations where we need to loop back further, for example, all the way back to Scoping, after Deployment?"
+"During the Data stage, how do we balance the need for accurate labeling with the time and resources required, especially with large datasets?"
+"For the Monitoring & Maintenance phase, what are some key metrics that we should be tracking to ensure the ML system continues to perform well over time, and how do we differentiate between normal variations and indicators of degradation?"
+The diagram shows looping back from Deployment to Data and Modeling. What are some specific examples of real-world scenarios that would necessitate such a loop?
+"How does the 'Scoping' phase typically interact with stakeholders who may not be technically proficient in machine learning, and what are some strategies for managing expectations during this initial phase?"
+"In the 'Data' phase, how do you determine the appropriate baseline to establish, and what impact does that baseline have on the rest of the ML project lifecycle?"
+The diagram shows feedback loops between the later stages and previous ones. What are some specific examples of issues discovered during deployment that would require us to revisit the data or modeling phases?
+"How does the 'Define data and establish baseline' step in the data stage impact the choices made later in the modeling stage, and how do we ensure the baseline remains relevant as the project evolves?"
+"In smaller projects, it may be tempting to rush through the 'Scoping' or 'Data' phases. What are some key questions we should ask ourselves during these early stages to avoid problems down the road?"
+"What specific design patterns or coding practices can lead to unpredictable ""Creeper""-like outcomes in software development?"
+"How can we use environment design, similar to the cherry blossom forest, to enhance or mitigate risks associated with certain elements in our projects?"
+"Can the Creeper in this context be viewed as a metaphor for a specific type of threat or vulnerability, and what strategies can we use to anticipate and neutralize such threats?"
+"Could you elaborate on the difference between the 'addressM' and 'pc' outputs? Are they always the same, or are there cases where they differ?"
+The slide mentions 'asserts the writeM bit'. Can you explain the practical implications of this bit being asserted (what effect does it have on the external memory)?
+"The instruction examples seem to be based on a custom assembly language. Where can I find documentation regarding the specific syntax, instruction set, and memory addressing modes it utilizes?"

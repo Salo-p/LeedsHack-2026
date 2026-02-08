@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture Slide Analyser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #52ad52 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto 30px auto; /* Added 30px margin to the bottom */
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: white; /* Changed to white to stand out against the gradient */
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        .content-area {
+            line-height: 1.6;
+            color: #444;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Analyse Results</h1>
+
+    <div class="container">
+        <h2>Summary</h2>
+        <div class="content-area">
+            <p>{{ summary }}</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Questions to Ask</h2>
+        <div class="content-area">
+            <ul>
+                  {% for q in questions %}</li>
+                  <li>{{ q }}</li>
+                  {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <button onclick="window.location.href='index.html'">
+    ← Upload another slide
+    </button>
+    
+</body>
+</html>
