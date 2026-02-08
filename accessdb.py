@@ -137,7 +137,6 @@ def save_words(lecturer_id, start_word, end_word, module_id):
     cursor.execute(query, (start_word, end_word, lecture_id, lecturer_id))
     conn.commit()
 
-    lecture_id = cursor.lastrowid  # 🔥 THIS IS THE KEY
     conn.close()
     return start_word
 
