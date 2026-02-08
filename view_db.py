@@ -11,7 +11,7 @@ for row in cursor.fetchall():
 
 print("\nAttendance table contents:\n")
 
-cursor.execute("SELECT * FROM module")
+cursor.execute("SELECT * FROM lecture")
 rows = cursor.fetchall()
 
 for row in rows:
