@@ -30,7 +30,7 @@ def studentMain():
 # STAFF ROUTES
 
 @app.route("/Lecturer", methods=["POST"], endpoint="Lecturer")
-def start_lecture_route():
+def Lecturer_route():
     start_word = start_lecture(
         lecture_id,
         lecturer_id,
