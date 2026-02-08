@@ -1,3 +1,4 @@
+<!--
 <html>
     <body>
         <form action="{{ url_for("checkOut")}}" method="post">
@@ -9,5 +10,81 @@
             <br>
             <button type="submit">CHECK OUT</button>
         </form>
+    </body>
+</html>
+-->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lecture Slide Analyser</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background: linear-gradient(135deg, #52ad52 0%, #764ba2 100%);
+                margin: 0;
+                padding: 20px;
+                min-height: 100vh;
+            }
+            .container {
+                max-width: 800px;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto;
+                background: white;
+                padding: 40px;
+                border-radius: 10px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            }
+            h1 {
+                color: #333;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+            
+            .nav-buttons {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            button {
+                background-color: #52ad52;
+                color: white;
+                padding: 12px 30px;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            button:hover {
+                background-color: #288146;
+            }
+
+
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+
+
+            <form action="{{ url_for("checkOut")}}" method="post">
+            <div class="nav-buttons">
+                <label for="endWord">End Word:</label>
+                <input type="text" id="eWord" name="eWord" placeholder="Enter the end word">
+                <button type="submit">Check Out</button>
+            </div>
+           </form>
+
+        </div>
     </body>
 </html>

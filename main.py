@@ -108,8 +108,8 @@ def check_out_route():
         print(f"Error during check-out: {e}")
         return render_template("studentMain.html")
 
-@app.route("/endWord", methods=["POST"], endpoint="endWord")    
-def end_word_route():
+@app.route("/eWord", methods=["POST"], endpoint="eWord")    
+def eword_route():
     try:
         e_word = request.form.get("eWord")
         
@@ -123,9 +123,9 @@ def end_word_route():
         )
         
         if "error" in result:
-            return render_template("studentMain.html")
+            return render_template("studentEnd.html")
         
-        return render_template("studentEnd.html")
+        return render_template("studentMain.html")
     except Exception as e:
         print(f"Error during check-out: {e}")
         return render_template("studentMain.html")
@@ -134,6 +134,9 @@ def end_word_route():
 def help_route():
     return render_template("\AI summary\templates\index.html")
 
+@app.route("/endWord", methods=["GET"], endpoint="endWord")
+def backToWelcome():
+    return redirect(url_for("studentEnd.html"))
 
 # BACK BUTTON ROUTES
     
