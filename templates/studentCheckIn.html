@@ -59,12 +59,16 @@
                 <input type="text" id="seatNum" name="seatNum" placeholder="Enter the number">
                 <br>
                 <br>
-                <label for="startWord">Start Word:</label>
+                <label for="sWord">Start Word:</label>
                 <br>
                 <input type="text" id="sWord" name="sWord" placeholder="Enter the word">
                 <br>
                 <br>
             <button type="submit">CHECK IN</button>
+            {% if error %}
+                <p style="color:red;">{{ error }}</p>
+            {% endif %}
+        </div>
 
             <!--If staff accidently presses studentcheckin-->
             <a href="{{ url_for('backToWelcome') }}" class="nav-link">← Back</a>

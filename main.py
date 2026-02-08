@@ -59,27 +59,31 @@ def student_route():
 
 @app.route("/checkin", methods=["POST"], endpoint="checkIn")
 def check_in_route():
-    try:
-        s_word = request.form.get("sWord")
-        seat_num = request.form.get("seatNum")
-        
-        if not s_word or not seat_num:
-            return render_template("studentCheckIn.html")
-        
-        result = check_in(
-            lecture_id,
-            student_id,
-            s_word,
-            seat_num
+    s_word = request.form.get("sWord")
+    seat_num = request.form.get("seatNum")
+
+    if not s_word or not seat_num:
+        return render_template("studentCheckIn.html", error="Missing fields")
+
+    result = check_in(
+        lecture_id,
+        student_id,
+        s_word,
+        seat_num
+    )
+
+    if "error" in result:
+        return render_template(
+            "studentCheckIn.html",
+            error=result["error"]
         )
-        
-        if "error" in result:
-            return render_template("studentCheckIn.html")
-        
-        return render_template("studentMain.html")
-    except Exception as e:
-        print(f"Error during check-in: {e}")
-        return render_template("studentCheckIn.html")
+
+    # ✅ SUCCESS → redirect
+    return redirect(url_for("studentMain"))
+'''@app.route("/studentMain", methods=["GET"], endpoint="studentMain")
+//def student_main():
+   // return render_template("studentMain.html")'''
+
 
 @app.route("/checkout", methods=["POST"], endpoint="checkOut")    
 def check_out_route():
