@@ -17,7 +17,7 @@ module_id = 1    # Example module ID, replace with actual logic to get module ID
 
 @app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html")
+    return render_template("welcome.html")
 
 @app.route("/welcome", methods=["GET"])
 def welcome():
