@@ -101,37 +101,7 @@
             <br>
             <div class="stats-grid">
             <div class="grid">
-                <table border="1" cellpadding="15" cellspacing="0">
-                {% for seat in seats %}
-                    {% if loop.index0 % 5 == 0 %}
-                    <tr>
-                    {% endif %}
-
-                    <td style="
-                    text-align:center;
-                    background-color: {{ 'lightgreen' if seat.attending else '#f2f2f2' }};
-                    ">
-                    Seat {{ seat.seat_num }}<br>
-                    {% if seat.attending %}
-                        ✅
-                    {% else %}
-                        ❌
-                        {% endif %}
-                        </td>
-
-                        {% if loop.index0 % 5 == 4 %}
-                        </tr>
-                        {% endif %}
-                    {% endfor %}
-                    </table>
-                </div>
-                <div class="leaderboard">
-                    <br>
-                        <p>Computer Science is number {{departmentStats}} on the leaderboard!!!</p>
-                        <br>
-                        <p>Streak: 67</p>
-                    <br>
-                </div>
+                <input type="image" src="C:\Users\lizzy\OneDrive\Documents\GitHub\LH26\Screenshot 2026-02-08 113951.png" alt="grid" width="280" height="170">
             </div>
             <div class="stats-grid">
                 <form action="{{ url_for("help")}}" method="post">

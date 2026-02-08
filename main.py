@@ -63,7 +63,8 @@ def student_route():
 
 @app.route("/checkin", methods=["POST"], endpoint="checkIn")
 def check_in_route():
-    lecture_id = session.get("lecture_id")
+    '''lecture_id = session.get("lecture_id")'''
+    lecture_id = 2
 
     if not lecture_id:
         return render_template("studentCheckIn.html", error="Lecture not active")
