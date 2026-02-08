@@ -127,11 +127,14 @@ def save_words(lecture_id, lecturer_id, start_word, end_word, module_id):
     """Save start and end words for a lecture"""
     conn = get_connection()
     cursor = conn.cursor()
-    query = '''INSERT INTO Lecture (lectureID, moduleID, lecturerID, wordStart, wordEnd)
-            VALUES (?, ?, ?, ?, ?)'''
+    query = '''
+            UPDATE Lecture
+            SET wordStart = ?, wordEnd = ?
+            WHERE lectureID = ? AND lecturerID = ?
+            '''
     
     try:
-        cursor.execute(query, (lecture_id, module_id, lecturer_id, start_word, end_word))
+        cursor.execute(query, (start_word, end_word, lecture_id, lecturer_id))
         conn.commit()
     except Exception as e:
         print(f"Error saving words: {e}")
