@@ -52,8 +52,8 @@
 <body>
     <div class="container">
         <p>Word: {{sWord}}</p>
-        <form action="{{ url_for("FILLIN")}}" method="post">
-            <button type="submit">Go to Page 3</button>
+        <form action="{{ url_for("endLecture")}}" method="post">
+            <button type="submit">End Lecture</button>
         </form>
         <form action="{{ url_for("back")}}" method="post">
             <div class="nav-link">← Back</div>
