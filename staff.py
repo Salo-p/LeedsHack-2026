@@ -15,13 +15,19 @@ def generate_words():
     return start, end
 
 
-def start_lecture(lecture_id, lecturer_id, module_id):
+def start_lecture(lecturer_id, module_id):
     start_word, end_word = generate_words()
 
-    log_lecture(module_id)  # Log the lecture for the module
-    save_words(lecture_id, lecturer_id, start_word, end_word, module_id)  # Save the start and end words for the lecture
+    log_lecture_module(module_id)
 
-    return start_word
+    lecture_id = save_words(
+        lecturer_id,
+        start_word,
+        end_word,
+        module_id
+    )
+
+    return lecture_id, start_word
 
 
 def end_lecture(lecture_id, lecturer_id):

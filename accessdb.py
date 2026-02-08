@@ -105,7 +105,7 @@ def populate_test_data():
 
 # LECTURE FUNCTIONS
 
-def log_lecture(module_id):
+def log_lecture_module(module_id):
     """Retrieve numLectures for module, increment by 1, and update the record"""
     conn = get_connection()
     cursor = conn.cursor()
@@ -123,23 +123,21 @@ def log_lecture(module_id):
     finally:
         conn.close()
 
-def save_words(lecture_id, lecturer_id, start_word, end_word, module_id):
-    """Save start and end words for a lecture"""
+
+def save_words(lecturer_id, start_word, end_word, module_id):
     conn = get_connection()
     cursor = conn.cursor()
+
     query = '''
-            UPDATE Lecture
-            SET wordStart = ?, wordEnd = ?
-            WHERE lectureID = ? AND lecturerID = ?
-            '''
-    
-    try:
-        cursor.execute(query, (start_word, end_word, lecture_id, lecturer_id))
-        conn.commit()
-    except Exception as e:
-        print(f"Error saving words: {e}")
-    finally:
-        conn.close()
+        INSERT INTO Lecture (moduleID, lecturerID, wordStart, wordEnd)
+        VALUES (?, ?, ?, ?)
+    '''
+    cursor.execute(query, (module_id, lecturer_id, start_word, end_word))
+    conn.commit()
+
+    lecture_id = cursor.lastrowid  # 🔥 THIS IS THE KEY
+    conn.close()
+    return lecture_id
 
 def get_start_word(lecture_id, lecturer_id):
     """Get the start word for a lecture"""

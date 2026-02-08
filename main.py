@@ -2,8 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for
 from staff import start_lecture, end_lecture
 from student import check_in, check_out
 from accessdb import init_db
+from flask import session
 
 app = Flask(__name__, template_folder="templates")
+app.secret_key = "dev-secret-key"  # required for sessions
 
 # Initialize database on startup
 init_db()
@@ -31,11 +33,13 @@ def studentMain():
 
 @app.route("/Lecturer", methods=["POST"], endpoint="Lecturer")
 def lecturer_route():
-    start_word = start_lecture(
-        lecture_id,
+    lecture_id, start_word = start_lecture(
         lecturer_id,
         module_id
     )
+
+    session["lecture_id"] = lecture_id  # 🔥 shared reference
+
     return render_template("page2.html", sWord=start_word)
 
 @app.route("/endLecture", methods=["POST"], endpoint="endLecture")
@@ -59,11 +63,13 @@ def student_route():
 
 @app.route("/checkin", methods=["POST"], endpoint="checkIn")
 def check_in_route():
+    lecture_id = session.get("lecture_id")
+
+    if not lecture_id:
+        return render_template("studentCheckIn.html", error="Lecture not active")
+
     s_word = request.form.get("sWord")
     seat_num = request.form.get("seatNum")
-
-    if not s_word or not seat_num:
-        return render_template("studentCheckIn.html", error="Missing fields")
 
     result = check_in(
         lecture_id,
@@ -74,16 +80,9 @@ def check_in_route():
     )
 
     if "error" in result:
-        return render_template(
-            "studentCheckIn.html",
-            error=result["error"]
-        )
+        return render_template("studentCheckIn.html", error=result["error"])
 
-    # ✅ SUCCESS → redirect
     return redirect(url_for("studentMain"))
-'''@app.route("/studentMain", methods=["GET"], endpoint="studentMain")
-//def student_main():
-   // return render_template("studentMain.html")'''
 
 
 @app.route("/checkout", methods=["POST"], endpoint="checkOut")    
